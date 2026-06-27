@@ -1,0 +1,123 @@
+# Zomato Restaurant Recommendation System
+
+## Project Overview
+
+This project is a Content-Based Restaurant Recommendation System developed using Natural Language Processing (NLP) techniques. The system recommends restaurants similar to the restaurant selected by the user based on customer reviews.
+
+The recommendation engine uses TF-IDF Vectorization and Cosine Similarity to identify restaurants with similar review patterns and then ranks them according to their average ratings.
+
+---
+
+## Problem Statement
+
+The objective of this project is to build a content-based recommendation system in which:
+
+- A user enters or selects a restaurant name.
+- The system analyzes restaurant reviews.
+- Restaurants with similar reviews are identified.
+- Recommendations are displayed in descending order of ratings.
+
+---
+
+## Technologies Used
+
+- Python
+- Pandas
+- NumPy
+- Natural Language Processing (NLP)
+- Scikit-Learn
+- TF-IDF Vectorizer
+- Cosine Similarity
+- Streamlit
+
+---
+
+## Dataset
+
+Dataset: Zomato Restaurant Reviews Dataset
+
+Features used:
+
+- Restaurant Name
+- Rating
+- Reviews
+- Cost
+- Cuisines
+- Location
+
+---
+
+## Methodology
+
+### Data Preprocessing
+
+- Removed missing values
+- Removed punctuation
+- Converted text into lowercase
+- Cleaned review text
+
+### Feature Engineering
+
+TF-IDF Vectorization was applied to transform textual reviews into numerical vectors.
+
+### Similarity Calculation
+
+Cosine Similarity was used to calculate similarity between restaurants.
+
+### Recommendation Engine
+
+The system recommends restaurants with similar review content and sorts them by Mean Rating.
+
+---
+
+## Project Structure
+
+```text
+Zomato_Recommendation_System/
+│
+├── app.py
+├── restaurants.pkl
+├── similarity.pkl
+├── requirements.txt
+├── Capstone_Project1.ipynb
+├── zomato.csv
+└── README.md
+```
+
+## Running the Project
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run Streamlit App:
+
+```bash
+python -m streamlit run app.py
+```
+
+---
+
+## Sample Output
+
+User selects:
+
+```text
+Pai Vihar
+```
+
+Recommended restaurants:
+
+- Samosa Singh
+- Shanthi Sagar
+- New Friends
+- Atithi
+- Udupi Grand
+
+---
+
+## Conclusion
+
+A content-based restaurant recommendation system was successfully developed using NLP techniques. TF-IDF Vectorization and Cosine Similarity were used to recommend restaurants based on customer reviews. The final solution was deployed using Streamlit to provide an interactive user interface.
