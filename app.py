@@ -17,17 +17,48 @@ html, body, [class*="css"]  {
     font-family: 'Manrope', sans-serif;
 }
 
+/* Layered background: deep base + warm radial glows (mango/chili + cola-bubble feel) + faint food emoji texture */
 .stApp {
-    background: #1c1410;
     color: #f4ecdf;
+    background-color: #1c1410;
+    background-image:
+        radial-gradient(circle at 12% 18%, rgba(232,116,59,0.16) 0%, transparent 38%),
+        radial-gradient(circle at 88% 12%, rgba(216,68,53,0.14) 0%, transparent 42%),
+        radial-gradient(circle at 75% 85%, rgba(58,120,140,0.12) 0%, transparent 40%),
+        radial-gradient(circle at 8% 80%, rgba(184,140,40,0.10) 0%, transparent 35%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 2px, transparent 2px, transparent 26px);
+    background-attachment: fixed;
+}
+
+/* faint emoji texture band behind hero, purely decorative */
+.food-strip {
+    font-size: 1.4rem;
+    letter-spacing: 1.1rem;
+    opacity: 0.18;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: -0.6rem;
+    user-select: none;
 }
 
 .hero {
-    padding: 2.2rem 2rem 1.6rem 2rem;
+    position: relative;
+    padding: 2.2rem 2rem 1.8rem 2rem;
     border-radius: 18px;
-    background: linear-gradient(135deg, #2a1d14 0%, #1c1410 100%);
+    background: linear-gradient(135deg, rgba(42,29,20,0.92) 0%, rgba(28,20,16,0.92) 100%);
     border: 1px solid #3a2c1f;
     margin-bottom: 1.8rem;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "🍹";
+    position: absolute;
+    right: 1.6rem;
+    top: 1.2rem;
+    font-size: 3.2rem;
+    opacity: 0.22;
+    transform: rotate(8deg);
 }
 
 .hero h1 {
@@ -42,6 +73,7 @@ html, body, [class*="css"]  {
     color: #c9b8a3;
     font-size: 1.05rem;
     margin: 0;
+    max-width: 32rem;
 }
 
 .eyebrow {
@@ -84,16 +116,28 @@ div[data-baseweb="select"] {
 }
 
 .r-card {
-    background: #251c15;
+    position: relative;
+    background: linear-gradient(135deg, rgba(37,28,21,0.95) 0%, rgba(30,22,17,0.95) 100%);
     border: 1px solid #3a2c1f;
     border-radius: 14px;
     padding: 1.1rem 1.3rem;
     margin-bottom: 0.9rem;
-    transition: border-color 0.15s ease;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+    overflow: hidden;
 }
 
 .r-card:hover {
     border-color: #e8743b;
+    transform: translateY(-2px);
+}
+
+.r-card::before {
+    content: "🍽";
+    position: absolute;
+    right: 0.7rem;
+    bottom: 0.4rem;
+    font-size: 2.1rem;
+    opacity: 0.10;
 }
 
 .r-name {
@@ -122,7 +166,7 @@ div[data-baseweb="select"] {
 }
 
 .r-rating {
-    background: #3a5a3a;
+    background: #2f4a32;
     color: #b7e0b7;
 }
 </style>
@@ -138,6 +182,12 @@ def load_data():
 
 sim_data, restaurants_info = load_data()
 names = sim_data["restaurant_names"]
+
+# ---------------- Decorative strip ----------------
+st.markdown(
+    '<div class="food-strip">🍕 🍔 🍹 🍜 🥗 🍰 🍣 🥘 🍕 🍔 🍹 🍜 🥗 🍰 🍣 🥘 🍕 🍔 🍹 🍜 🥗 🍰 🍣 🥘</div>',
+    unsafe_allow_html=True,
+)
 
 # ---------------- Hero ----------------
 st.markdown("""
@@ -190,5 +240,3 @@ if go:
                     <span class="r-badge">{cost_text}</span>
                 </div>
                 """, unsafe_allow_html=True)
-
-        st.dataframe(result.reset_index(drop=True))
